@@ -1,0 +1,60 @@
+table.body {
+	width: 700px; /* temporary */
+	margin: 5% auto;
+}
+
+table.players {
+	margin: 35px auto;
+}
+
+table.players tr>td {
+	padding: 0px 0px 0px 5px;
+}
+
+td.right {
+	text-align: right;
+}
+
+td.small {
+	font-size: 50%;
+}
+
+td.refresh {
+	font-size: 200%;
+	text-align: center;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+div.submit {
+	margin-bottom: 50px;
+	margin-top: 20px;
+	text-align: center;
+}
+
+table.sortable {
+	margin: 50px auto;
+	font-size: 120%;
+}
+
+table.sortable caption {
+	font-weight: bold;
+	font-size: 150%;
+	margin-bottom: 20px;
+}
+
+table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
+}
+
+table.sortable td {
+	padding: 0px 5px 0px 5px;
+}
+
+/* margin and padding's order: top, right, bottom, left */
