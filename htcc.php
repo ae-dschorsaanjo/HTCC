@@ -53,7 +53,8 @@ const modes = array(
  */
 function getModes($selected) {
 	$out = '';
-	echo $selected;
+	if (!$selected)
+		$selected = ENG;
 	for ($i = 0, $max = count(modes); $i < $max; $i++)
 		$out .= '<option value="' . modes[$i][0] . '"' . ($selected == modes[$i][0] ? " selected" : '') . '>' . modes[$i][1] . '</option>';
 	return $out;
@@ -123,12 +124,15 @@ function writeTable() {
 		"</tr>";
 
 	for ($i = minSize; $i <= check($_POST['teamsize']); $i++) {
-		$team[$i] = new Player($i,
-		                       check($_POST['pname' . $i]),
-							   check($_POST['pnum' . $i]),
-							   check($_POST['pexp' . $i]),
-							   check($_POST['plead' . $i]));
-		$team[$i]->outF();
+		$pname = check($_POST['pname' . $i]);
+		if ($pname) {
+			$team[$i] = new Player($i,
+								$pname,
+								check($_POST['pnum' . $i]),
+								check($_POST['pexp' . $i]),
+								check($_POST['plead' . $i]));
+			$team[$i]->outF();
+		}
 	}
 
 	echo "</table>";
@@ -158,7 +162,7 @@ function writeTable() {
 
 <form method="post">
 	Team's name: <input type='text' name='teamname' value='<?php echo isset($_POST['teamname']) ? $_POST['teamname'] : ''; ?>' required />&nbsp;&nbsp;&nbsp;&nbsp;
-	Team's size: <input type='number' name='teamsize' min='0' max='99' value='<?php echo isset($_POST['teamsize']) ? $_POST['teamsize'] : 16; ?>' />
+	Team's size: <input type='number' name='teamsize' min='<?php echo minSize; ?>' max='<?php echo maxSize; ?>' value='<?php echo isset($_POST['teamsize']) ? $_POST['teamsize'] : 16; ?>' />
 	Values: <select name='valuesmode'><?php
 		echo getModes($_POST['valuesmode']);
 	?></select>
@@ -169,12 +173,12 @@ function writeTable() {
 
 <?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		if (!isset($_POST['data'])) {
 ?>
 
 <form method='post'>
 	<input name='teamname' value='<?php echo $_POST['teamname']; ?>' hidden />
 	<input name='teamsize' value='<?php echo $_POST['teamsize']; ?>' hidden />
+	<input name='valuesmode' value='<?php echo $_POST['valuesmode']; ?>' hidden />
 	<table class='players'>
 		<tr class='head'>
 			<th>id</th>
@@ -206,10 +210,8 @@ function writeTable() {
 </form>
 
 <?php
-		}
-		else {
+		if (isset($_POST['data']))
 			writeTable();
-		}
 	}
 	else {
 		//echo "There's nothing to show.";
