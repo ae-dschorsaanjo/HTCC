@@ -73,6 +73,7 @@ div.json {
 	padding: 0.5em;
 	width: fit-content;
 	max-width: 500px;
+	word-wrap: break-word;
 }
 
 /* margin and padding's order: top, right, bottom, left */
