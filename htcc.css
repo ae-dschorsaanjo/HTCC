@@ -1,6 +1,15 @@
-table.body {
-	width: 700px; /* temporary */
+div.body {
+	max-width: 1000px;
 	margin: 5% auto;
+}
+
+form {
+	margin: 0 auto;
+	text-align: center;
+}
+
+select.gen {
+	width: 140px;
 }
 
 table.players {
