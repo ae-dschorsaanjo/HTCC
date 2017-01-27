@@ -141,18 +141,18 @@ function writeTable() {
 function writeJSON() {
 	$arr = array();
 	$arr['teamname'] = check($_POST['teamname']);
-	$arr['teamsize'] = check($_POST['teamsize']);
 	$arr['team'] = array();
-	for ($i = minSize, $max = check($_POST['teamsize']), $y = $i; $i <= $max; $i++) {
+	for ($i = minSize, $max = check($_POST['teamsize']), $y = $i-1; $i <= $max; $i++) {
 		$pname = check($_POST['pname' . $i]);
 		if ($pname) {
+			$y++;
 			$arr['team']["pname$y"] = $pname;
 			$arr['team']["pexp$y"] = check($_POST["pexp$i"]);
 			$arr['team']["plead$y"] = check($_POST["plead$i"]);
 			$arr['team']["pnum$y"] = check($_POST["pnum$i"]);
-			$y++;
 		}
 	}
+	$arr['teamsize'] = $y;
 	echo "<div class='json'>" .
 		json_encode($arr);
 		'</div>';
