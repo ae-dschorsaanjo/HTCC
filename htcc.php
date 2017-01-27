@@ -195,7 +195,7 @@ function writeJSON() {
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
-<form method='post'>
+<form method='post' name='team'>
 	<input name='teamname' value='<?php echo $_POST['teamname']; ?>' hidden />
 	<input name='teamsize' value='<?php echo $_POST['teamsize']; ?>' hidden />
 	<input name='valuesmode' value='<?php echo $_POST['valuesmode']; ?>' hidden />

@@ -8,6 +8,8 @@ $(function () {
 			else
 				$("[name='tr" + i + "']").hide();
 		}
+
+		$("form[name='team'] input[name='teamsize']").val(num);
 	}
 
 	$("form").keypress(function(e) {
