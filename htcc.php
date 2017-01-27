@@ -138,6 +138,26 @@ function writeTable() {
 	echo "</table>";
 }
 
+function writeJSON() {
+	$arr = array();
+	$arr['teamname'] = check($_POST['teamname']);
+	$arr['teamsize'] = check($_POST['teamsize']);
+	$arr['team'] = array();
+	for ($i = minSize, $max = check($_POST['teamsize']), $y = $i; $i <= $max; $i++) {
+		$pname = check($_POST['pname' . $i]);
+		if ($pname) {
+			$arr['team']["pname$y"] = $pname;
+			$arr['team']["pexp$y"] = check($_POST["pexp$i"]);
+			$arr['team']["plead$y"] = check($_POST["plead$i"]);
+			$arr['team']["pnum$y"] = check($_POST["pnum$i"]);
+			$y++;
+		}
+	}
+	echo "<div class='json'>" .
+		json_encode($arr);
+		'</div>';
+}
+
 // ---------- main ---------- //
 
 ?>
@@ -210,8 +230,10 @@ function writeTable() {
 </form>
 
 <?php
-		if (isset($_POST['data']))
+		if (isset($_POST['data'])) {
 			writeTable();
+			writeJSON();
+		}
 	}
 	else {
 		//echo "There's nothing to show.";
