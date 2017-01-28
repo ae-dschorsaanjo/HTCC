@@ -14,17 +14,17 @@ $(function () {
 
 	$("form").keypress(function(e) {
 	  
-	  if (e.which == 13)
-	    return false;
+		if (e.which == 13)
+			return false;
 	});
-
+/*
 	$("[name='teamfilecheck']").change(function(e) {
 		
 		$("[name='teamfile']").prop("disabled", !$("[name='teamfilecheck']").prop("checked"));
 		$("[name='teamfileread']").prop("disabled", !$("[name='teamfilecheck']").prop("checked"));
 		$("[name='teamname']").prop("disabled", $("[name='teamfilecheck']").prop("checked"));
 		$("[name='teamsize']").prop("disabled", $("[name='teamfilecheck']").prop("checked"));
-	});
+});*/
 	
 	$("[name='teamsize']").change(function (e) {
 		
