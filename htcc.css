@@ -66,8 +66,12 @@ table.sortable td {
 	padding: 0px 5px 0px 5px;
 }
 
-div.json {
+.json {
 	margin: 0 auto;
+}
+
+div.json {
+	margin-bottom: 1em;
 	border: 3px outset lightgray;
 	border-radius: 5px 5px;
 	padding: 0.5em;

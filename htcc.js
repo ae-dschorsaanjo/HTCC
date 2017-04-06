@@ -35,7 +35,4 @@ $(function () {
 	if (!isPosted)
 		$("input[name='teamname']").focus();
 	
-	//alert(isPosted);
-	//if (isPosted)
-		//$("table.players").hide();
 });

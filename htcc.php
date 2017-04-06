@@ -56,7 +56,10 @@ function getModes($selected) {
 	if (!$selected)
 		$selected = ENG;
 	for ($i = 0, $max = count(modes); $i < $max; $i++)
-		$out .= '<option value="' . modes[$i][0] . '"' . ($selected == modes[$i][0] ? " selected" : '') . '>' . modes[$i][1] . '</option>';
+		$out .= '<option value="' . modes[$i][0] . '"'
+		      . ($selected == modes[$i][0] ? " selected" : '') . '>'
+			  . modes[$i][1]
+			  . '</option>';
 	return $out;
 }
 
@@ -76,7 +79,9 @@ function getOptions($min, $max, $selected = 0, $needvalues = 1) {
 	
 	$out = '';
 	for ($i = $min; $i <= $max; $i++)
-		$out .= "<option value='" . $i . ($i == $selected ? "' selected " : "'") . ">" . ($needvalues ? $_values[$i][$needvalues] : $i) . "</option>\n";
+		$out .= "<option value='"
+		     . $i . ($i == $selected ? "' selected " : "'") . ">"
+		     . ($needvalues ? $_values[$i][$needvalues] : $i) . "</option>\n";
 	return $out;
 }
 
@@ -107,7 +112,13 @@ class Player {
 	}
 	
 	public function outF() {
-		echo "<tr><td>" . $this->numba . newCell . $this->name . newCell . $this->exp . newCell . $this->lead . newCell . $this->tcv . "</td></tr>" ;
+		echo "<tr><td>"
+		   . $this->numba . newCell
+		   . $this->name . newCell
+		   . $this->exp . newCell
+		   . $this->lead . newCell
+		   . $this->tcv
+		   . "</td></tr>" ;
 	}
 }
 
@@ -127,10 +138,10 @@ function writeTable() {
 		$pname = check($_POST['pname' . $i]);
 		if ($pname) {
 			$team[$i] = new Player($i,
-								$pname,
-								check($_POST['pnum' . $i]),
-								check($_POST['pexp' . $i]),
-								check($_POST['plead' . $i]));
+								   $pname,
+								   check($_POST['pnum' . $i]),
+								   check($_POST['pexp' . $i]),
+								   check($_POST['plead' . $i]));
 			$team[$i]->outF();
 		}
 	}
@@ -153,9 +164,9 @@ function writeJSON() {
 		}
 	}
 	$arr['teamsize'] = $y;
-	echo "<div class='json'>" .
-		json_encode($arr);
-		'</div>';
+	$out = json_encode($arr);
+	echo "<div class='json'>" . $out . '</div>';
+	return $out;
 }
 
 // ---------- main ---------- //
@@ -211,17 +222,30 @@ function writeJSON() {
 		<tr><td class='small'>&nbsp;</td></tr>
 
 		<?php
-			for ($i = 1; $i <= 50; $i++) {
-				echo "<tr name='tr" . $i . "'><td class='right'>" .
-					$i . 
-					"</td><td><input type='text' name='pname$i' />\n</td><td><select class='gen' name='pexp$i'>\n" . 
-					getOptions(minIndex, maxExp, 0, $_POST['valuesmode']) .
-					"</select>" .
-					"</td><td><select class='gen' name='plead$i'>\n" . 
-					getOptions(minIndex, maxLead, 0, $_POST['valuesmode']) .
-					"</select>\n" .
-					"</td><td><input type='number' name='pnum$i' min='" . minJersey . "' max='" . maxJersey . "' value='$i'</td></tr>\n\n";
-			}
+		for ($i = 1; $i <= 50; $i++) {
+			echo "<tr name='tr" . $i . "'>"
+			    . "<td class='right'>"
+				. $i
+				. "</td>"
+				. "<td><input type='text' name='pname$i' value='"
+				. ($_POST["pname$i"] ?: '')
+				. "'/>\n</td>"
+				. "<td><select class='gen' name='pexp$i'>\n"
+				. getOptions(minIndex,
+				             maxExp,
+							 ($_POST["pexp$i"] ?: 0),
+							 $_POST['valuesmode'])
+				. "</select></td>"
+				. "<td><select class='gen' name='plead$i'>\n"
+				. getOptions(minIndex,
+				             maxLead,
+							 ($_POST["plead$i"] ?: 0),
+							 $_POST['valuesmode'])
+				. "</select></td>\n"
+				. "<td><input type='number' name='pnum$i' "
+				. "min='" . minJersey . "' max='" . maxJersey . "' "
+				. "value='" . ($_POST["pnum$i"] ?: $i) . "'</td></tr>\n\n";
+		}
 		?>
 		<tr><td colspan='5'>
 		<div class='submit'><input type='submit' name='data' value='Send'/></div>
@@ -232,7 +256,11 @@ function writeJSON() {
 <?php
 		if (isset($_POST['data'])) {
 			writeTable();
-			writeJSON();
+			$json = writeJSON();
+			echo "<form method='post' action='dl_json.php'>"
+			   . "<input type='submit' value='Download JSON' />"
+               . "<input type='hidden' name='json' value='" . $json . "' />"
+			   . "</form>";
 		}
 	}
 	else {
