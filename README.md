@@ -7,10 +7,10 @@ You can set
 - the players' name, experience and leadership values,
 - and these values' type (available choices: text-English, text-Hungarian numeric, hybrid numeric-English and hybrid numeric-Hungarian ).
 
-The output will be shown as a sortable table (or "sortTable").
+The output will be shown as a sortable table (or "sortTable") and you also can download it as a JSON file.
 
 ## What it will know
-- Import and export the team's and the player's data,
+- Import the team's and the player's data,
 - add new features by request.
 
 # License
